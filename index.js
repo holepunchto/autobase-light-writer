@@ -4,11 +4,15 @@ const c = require('compact-encoding')
 module.exports = class AutobaseLightWriter {
   constructor (store, key, opts = {}) {
     const active = opts.active !== false
+    const encryptionKey = opts.encryptionKey
+    const blockEncryptionKey = opts.blockEncryptionKey
 
     this.bootstrap = store.get({ key, active })
     this.store = store.namespace(this.bootstrap, { detach: false })
     this.valueEncoding = opts.valueEncoding || null
-    this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false })
+    this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false, encryptionKey })
+
+    if (blockEncryptionKey) this.local.setEncryptionKey(blockEncryptionKey, { isBlockKey: true })
 
     this.wokeup = false
     this.extension = this.bootstrap.registerExtension('autobase', {
