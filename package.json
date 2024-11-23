@@ -1,0 +1,30 @@
+{
+  "name": "autobase-light-writer",
+  "version": "0.0.0",
+  "description": "Detached autobase writer that is just a single core with no causal info",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "standard"
+  },
+  "dependencies": {
+    "autobase": "^6.5.11",
+    "compact-encoding": "^2.15.1"
+  },
+  "devDependencies": {
+    "corestore": "^6.18.4",
+    "standard": "^17.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/holepunchto/autobase-light-writer.git"
+  },
+  "author": "Holepunch Inc.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/holepunchto/autobase-light-writer/issues"
+  },
+  "homepage": "https://github.com/holepunchto/autobase-light-writer"
+}
