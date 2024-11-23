@@ -8,18 +8,19 @@ module.exports = class AutobaseLightWriter {
     this.bootstrap = store.get({ key, active })
     this.store = store.namespace(this.bootstrap, { detach: false })
     this.valueEncoding = opts.valueEncoding || null
-    this.local = this.store.get({ name: 'autobase-light-writer', active })
+    this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false })
 
     this.wokeup = false
     this.extension = this.bootstrap.registerExtension('autobase', {
       onmessage: this._onmessage.bind(this)
     })
 
-    this.ready().catch(noop)
-
     this.bootstrap.on('peer-add', (peer) => {
+      if (this.local.opened === false) return
       this.extension.send(this._encodeWakeup(), peer)
     })
+
+    this.ready().catch(noop)
   }
 
   get key () {
@@ -31,11 +32,21 @@ module.exports = class AutobaseLightWriter {
   }
 
   _onmessage (msg, peer) {
-    this.extension.send(this._encodeWakeup(), peer)
+    if (this.local.opened === false) return
+
+    let value = null
+    try {
+      value = c.decode(Wakeup, msg)
+    } catch {
+      return
+    }
+
+    if (value.type === 0) this.extension.send(this._encodeWakeup(), peer)
   }
 
   async ready () {
     await this.bootstrap.ready()
+    await this.local.ready()
 
     if (!this.wokeup) {
       this.wokeup = true
