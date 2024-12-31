@@ -8,7 +8,7 @@ module.exports = class AutobaseLightWriter {
     const blockEncryptionKey = opts.blockEncryptionKey
 
     this.bootstrap = store.get({ key, active })
-    this.store = store.namespace(this.bootstrap, { detach: false })
+    this.store = store
     this.valueEncoding = opts.valueEncoding || null
     this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false, encryptionKey })
 
