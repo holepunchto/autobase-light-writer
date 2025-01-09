@@ -10,11 +10,11 @@
     "test": "standard"
   },
   "dependencies": {
-    "autobase": "^6.5.11",
+    "autobase": "holepunchto/autobase#rocksdb",
     "compact-encoding": "^2.15.1"
   },
   "devDependencies": {
-    "corestore": "^6.18.4",
+    "corestore": "holepunchto/corestore#v7",
     "standard": "^17.1.2"
   },
   "repository": {
