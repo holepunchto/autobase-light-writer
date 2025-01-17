@@ -14,7 +14,7 @@
     "compact-encoding": "^2.15.1"
   },
   "devDependencies": {
-    "corestore": "holepunchto/corestore#v7",
+    "corestore": "^v7.0.0",
     "standard": "^17.1.2"
   },
   "repository": {
