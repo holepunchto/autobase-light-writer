@@ -1,6 +1,6 @@
 {
   "name": "autobase-light-writer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Detached autobase writer that is just a single core with no causal info",
   "main": "index.js",
   "files": [
