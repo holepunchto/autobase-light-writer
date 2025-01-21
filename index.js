@@ -12,7 +12,7 @@ module.exports = class AutobaseLightWriter {
     this.valueEncoding = opts.valueEncoding || null
     this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false, encryptionKey })
 
-    if (blockEncryptionKey) this.local.setEncryptionKey(blockEncryptionKey, { isBlockKey: true })
+    if (blockEncryptionKey) this.local.setEncryptionKey(blockEncryptionKey, { block: true })
 
     this.wokeup = false
     this.extension = this.bootstrap.registerExtension('autobase', {
