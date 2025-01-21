@@ -10,11 +10,11 @@
     "test": "standard"
   },
   "dependencies": {
-    "autobase": "^6.5.11",
+    "autobase": "^7.0.0",
     "compact-encoding": "^2.15.1"
   },
   "devDependencies": {
-    "corestore": "^6.18.4",
+    "corestore": "^7.0.0",
     "standard": "^17.1.2"
   },
   "repository": {
