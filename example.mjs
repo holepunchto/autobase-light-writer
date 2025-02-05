@@ -30,10 +30,11 @@ await w.append({ hello: 'verden' })
   s1.pipe(s2).pipe(s1)
 }
 
+let nextTarget = 1000
 base.view.on('append', async function () {
-  console.log('onappend!', base.view.length, base.view.signedLength)
-  for (let i = 0; i < base.view.length; i++) {
-    console.log(i, await base.view.get(i))
+  if (base.view.length >= nextTarget || base.view.length > -10 + 2 ** 15) {
+    console.log('onappend!', base.view.length, base.view.signedLength)
+    nextTarget += 1000
   }
 })
 
@@ -43,3 +44,15 @@ await base.ack()
 if (base.view.length === 0) {
   await base.append({ type: 'add', key: w.local.key.toString('hex') })
 }
+
+if (base.view.length > 10) throw new Error('Clear your example-store storage (easier to test when starting form empty storage')
+
+const nrBlocks = 10000 + 2 ** 15
+console.log('appending', nrBlocks, 'blocks')
+for (let i = 0; i < nrBlocks; i++) {
+  w.append({ content: `Block${i}` }).catch(e => console.error(e))
+}
+
+console.log('waiting now...')
+
+await new Promise(resolve => setTimeout(resolve, 1000000))

@@ -10,8 +10,9 @@
     "test": "standard"
   },
   "dependencies": {
-    "autobase": "^7.0.0",
-    "compact-encoding": "^2.15.1"
+    "autobase": "holepunchto/autobase",
+    "compact-encoding": "^2.15.1",
+    "hypercore": "holepunchto/hypercore"
   },
   "devDependencies": {
     "corestore": "^7.0.0",
