@@ -6,11 +6,15 @@ module.exports = class AutobaseLightWriter {
     const active = opts.active !== false
     const encryptionKey = opts.encryptionKey
     const blockEncryptionKey = opts.blockEncryptionKey
+    const manifest = opts.manifest
+    const keyPair = opts.keyPair
 
     this.bootstrap = store.get({ key, active })
     this.store = store
     this.valueEncoding = opts.valueEncoding || null
-    this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false, encryptionKey })
+
+    const name = manifest ? undefined : 'autobase-light-writer'
+    this.local = this.store.get({ name, active, compat: false, encryptionKey, manifest, keyPair })
 
     if (blockEncryptionKey) this.local.setEncryptionKey(blockEncryptionKey, { block: true })
 
