@@ -10,7 +10,7 @@ module.exports = class AutobaseLightWriter {
 
     this.bootstrap = store.get({ key, active })
     this.store = store
-    this.valueEncoding = opts.valueEncoding || null
+    this.valueEncoding = c.from(opts.valueEncoding || 'binary')
     this.local = this.store.get({ name: 'autobase-light-writer', active, compat: false, encryptionKey, valueEncoding: OplogMessage })
 
     if (blockEncryptionKey) this.local.setEncryptionKey(blockEncryptionKey, { block: true })
@@ -68,8 +68,8 @@ module.exports = class AutobaseLightWriter {
     return c.encode(Wakeup, { version: 1, type: 1, writers })
   }
 
-  append (message) {
-    const value = this.valueEncoding === null ? message : c.encode(this.valueEncoding, message)
+  append (value) {
+    value = c.encode(this.valueEncoding, value)
     return this.local.append({
       version: OPLOG_VERSION,
       digest: null,
