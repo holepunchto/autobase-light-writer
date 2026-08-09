@@ -10,8 +10,9 @@
     "test": "standard && brittle-node test/all.mjs"
   },
   "dependencies": {
-    "autobase": "^7.0.0",
-    "compact-encoding": "^2.15.1"
+    "autobase": "holepunchto/autobase",
+    "compact-encoding": "^2.15.1",
+    "hypercore": "holepunchto/hypercore"
   },
   "devDependencies": {
     "autobase-test-helpers": "^3.1.0",
